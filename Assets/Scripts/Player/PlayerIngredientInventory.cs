@@ -51,7 +51,20 @@ public class PlayerIngredientInventory : MonoBehaviour
         currentIngredientType = IngredientType.None;
     }
 
-    //NEW: Allow dropping crafted taco
+    // NEW: Drop the held object and return it to be placed in the scene
+    public GameObject DropAndReturnVisual()
+    {
+        if (!IsCarrying())
+            return null;
+
+        GameObject dropped = heldObject;
+        heldObject = null;
+        currentIngredientType = IngredientType.None;
+
+        return dropped;
+    }
+
+    // Allow dropping crafted taco (or burger, shake, etc.)
     public bool IsHoldingCraftedTaco()
     {
         return heldObject != null && currentIngredientType == IngredientType.None;

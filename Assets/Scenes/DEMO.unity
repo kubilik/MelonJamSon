@@ -1999,7 +1999,8 @@ GameObject:
   - component: {fileID: 1665713632}
   - component: {fileID: 1665713631}
   - component: {fileID: 1665713630}
-  m_Layer: 0
+  - component: {fileID: 1665713633}
+  m_Layer: 7
   m_Name: shake 1 spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2095,6 +2096,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1665713628}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1665713633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665713628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b95b4cd92a8d147b4efd2bd1ac156d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placedCup: {fileID: 0}
 --- !u!1 &1674330396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2142,7 +2156,8 @@ GameObject:
   - component: {fileID: 1699771437}
   - component: {fileID: 1699771436}
   - component: {fileID: 1699771435}
-  m_Layer: 0
+  - component: {fileID: 1699771439}
+  m_Layer: 7
   m_Name: Empty Cup Dispenser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2238,6 +2253,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1699771439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699771434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db42b40a4b6928e48b9d9ee07c1cd24b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cupType: 9
+  cupVisualPrefab: {fileID: 7499453007754909691, guid: e1ff042c78c02154a934cd378551fb74, type: 3}
 --- !u!1 &1709711216
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,7 +3314,8 @@ GameObject:
   - component: {fileID: 2144540643}
   - component: {fileID: 2144540642}
   - component: {fileID: 2144540641}
-  m_Layer: 0
+  - component: {fileID: 2144540644}
+  m_Layer: 7
   m_Name: shake 1 button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3381,6 +3411,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144540639}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2144540644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144540639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f74243b9f746464f89cf722c690e59c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cupPlacementPoint: {fileID: 1665713633}
+  filledCupPrefab: {fileID: 1462478551769125655, guid: 1fbb4ab5daa0273448f41f2f72e735f2, type: 3}
 --- !u!1 &6478599439972380
 GameObject:
   m_ObjectHideFlags: 0

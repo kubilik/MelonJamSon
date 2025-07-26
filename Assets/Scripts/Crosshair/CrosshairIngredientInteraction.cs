@@ -191,6 +191,50 @@ public class CrosshairIngredientInteraction : MonoBehaviour
                 return;
             }
 
+            // Shake Machine Cup Placement Point
+            ShakeMachineCupPlacementPoint shakePoint = hit.collider.GetComponent<ShakeMachineCupPlacementPoint>();
+            if (shakePoint != null && inventory.IsCarrying() && inventory.GetHeldIngredientType() == IngredientType.ShakeEmptyCup)
+            {
+                if (!shakePoint.HasCup())
+                {
+                    interactionText.text = "[E] Place cup under machine";
+                    interactionText.gameObject.SetActive(true);
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        GameObject cupVisual = inventory.DropAndReturnVisual();
+                        if (cupVisual != null)
+                        {
+                            shakePoint.PlaceCup(cupVisual);
+                            Debug.Log("Placed cup under shake machine.");
+                        }
+
+                    }
+                }
+                else
+                {
+                    interactionText.text = "Cup already placed";
+                    interactionText.gameObject.SetActive(true);
+                }
+
+                return;
+            }
+
+            // 5. Shake Fill Button
+            ShakeMachineFiller filler = hit.collider.GetComponent<ShakeMachineFiller>();
+            if (filler != null)
+            {
+                interactionText.text = "[E] Fill cup";
+                interactionText.gameObject.SetActive(true);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    filler.TryFillCup();
+                }
+                return;
+            }
+
+
 
 
         }
