@@ -23,7 +23,10 @@ public class HamburgerBuilder : MonoBehaviour
     private List<IngredientType> currentIngredients = new List<IngredientType>();
     private List<GameObject> spawnedVisuals = new List<GameObject>();
 
-    public bool hasFinishedHamburger = false;
+    private GameObject currentFinishedInstance;
+    private bool hasFinishedHamburger = false;
+
+    public bool HasFinishedBurger => hasFinishedHamburger;
 
     public void AddIngredient(IngredientType type)
     {
@@ -60,7 +63,7 @@ public class HamburgerBuilder : MonoBehaviour
         {
             if (IsCorrectCombination())
             {
-                Instantiate(finishedHamburgerPrefab, finalSpawnPoint.position, finalSpawnPoint.rotation);
+                currentFinishedInstance = Instantiate(finishedHamburgerPrefab, finalSpawnPoint.position, finalSpawnPoint.rotation);
                 hasFinishedHamburger = true;
                 Debug.Log("Hamburger completed.");
             }
@@ -105,19 +108,24 @@ public class HamburgerBuilder : MonoBehaviour
     private void ResetBuilder()
     {
         currentIngredients.Clear();
+
         foreach (GameObject visual in spawnedVisuals)
         {
             if (visual != null)
                 Destroy(visual);
         }
+
         spawnedVisuals.Clear();
     }
 
     public void ClearFinishedHamburger()
     {
+        if (currentFinishedInstance != null)
+        {
+            Destroy(currentFinishedInstance);
+            currentFinishedInstance = null;
+        }
+
         hasFinishedHamburger = false;
     }
-
-    public bool HasFinishedBurger => hasFinishedHamburger;
-
 }

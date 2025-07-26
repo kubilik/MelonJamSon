@@ -158,10 +158,15 @@ public class CrosshairIngredientInteraction : MonoBehaviour
                 {
                     inventory.PickUpIngredient(IngredientType.None, handHeldHamburgerPrefab);
 
-                    FinishedHamburgerInstance instance = hit.collider.GetComponent<FinishedHamburgerInstance>();
-                    if (instance != null && instance.originatingBuilder != null)
+                    // HamburgerBuilder'ý bulup temizle
+                    HamburgerBuilder[] allBuilders = FindObjectsOfType<HamburgerBuilder>();
+                    foreach (var builder in allBuilders)
                     {
-                        instance.originatingBuilder.ClearFinishedHamburger();
+                        if (builder.HasFinishedBurger)
+                        {
+                            builder.ClearFinishedHamburger();
+                            break;
+                        }
                     }
 
                     Destroy(hit.collider.gameObject);
@@ -169,6 +174,7 @@ public class CrosshairIngredientInteraction : MonoBehaviour
                 }
                 return;
             }
+
 
 
         }
