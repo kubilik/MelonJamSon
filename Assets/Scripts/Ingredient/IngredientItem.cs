@@ -7,12 +7,10 @@ public enum IngredientType
     Filling,
     Topping,
     FinishedTaco,
-    EmptyCup,
-    FilledCup,
-    IcedCup,
-    FinalShake,
-    Ice,
-    Straw
+    Bun,         
+    Patty,       
+    Cheese,      
+    Lettuce
 }
 
 public class IngredientItem : MonoBehaviour
