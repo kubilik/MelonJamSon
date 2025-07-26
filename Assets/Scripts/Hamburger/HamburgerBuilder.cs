@@ -117,4 +117,7 @@ public class HamburgerBuilder : MonoBehaviour
     {
         hasFinishedHamburger = false;
     }
+
+    public bool HasFinishedBurger => hasFinishedHamburger;
+
 }

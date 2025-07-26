@@ -8,6 +8,7 @@ public class CrosshairIngredientInteraction : MonoBehaviour
     public LayerMask interactionLayer;
 
     public GameObject handHeldTacoPrefab;
+    public GameObject handHeldHamburgerPrefab;
 
     private Camera cam;
 
@@ -26,8 +27,6 @@ public class CrosshairIngredientInteraction : MonoBehaviour
         if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayer))
         {
             PlayerIngredientInventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerIngredientInventory>();
-             
-             
 
             // 1. Taco IngredientPickup
             IngredientPickup pickup = hit.collider.GetComponent<IngredientPickup>();
@@ -43,9 +42,8 @@ public class CrosshairIngredientInteraction : MonoBehaviour
                 }
                 return;
             }
-             
 
-            // 2. Place on prep counter
+            // 2. Place on Taco Prep Counter
             PrepCounter prep = hit.collider.GetComponent<PrepCounter>();
             if (prep != null && inventory.IsCarrying())
             {
@@ -79,7 +77,41 @@ public class CrosshairIngredientInteraction : MonoBehaviour
                 return;
             }
 
-            // 3. Trash Can
+            // 3. Place on Hamburger Prep Counter
+            HamburgerPrepCounter burgerPrep = hit.collider.GetComponent<HamburgerPrepCounter>();
+            if (burgerPrep != null && inventory.IsCarrying())
+            {
+                IngredientType carried = inventory.GetHeldIngredientType();
+
+                if (burgerPrep.builder.HasFinishedBurger)
+                {
+                    interactionText.text = "Burger ready - clear it first";
+                    interactionText.gameObject.SetActive(true);
+                    return;
+                }
+
+                if (System.Array.Exists(burgerPrep.acceptedTypes, t => t == carried))
+                {
+                    interactionText.text = "[E] Place on burger counter";
+                    interactionText.gameObject.SetActive(true);
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        inventory.DropIngredient();
+                        burgerPrep.builder.AddIngredient(carried);
+                        Debug.Log("Placed on burger counter: " + carried);
+                    }
+                }
+                else
+                {
+                    interactionText.text = "Cannot place this item here";
+                    interactionText.gameObject.SetActive(true);
+                }
+
+                return;
+            }
+
+            // 4. Trash Can
             TrashCan trash = hit.collider.GetComponent<TrashCan>();
             if (trash != null && (inventory.IsCarrying() || inventory.IsHoldingCraftedTaco()))
             {
@@ -94,7 +126,7 @@ public class CrosshairIngredientInteraction : MonoBehaviour
                 return;
             }
 
-            // 4. Finished Taco
+            // 5. Finished Taco
             if (hit.collider.CompareTag("FinishedTaco") && !inventory.IsCarrying())
             {
                 interactionText.text = "[E] Pick up Taco";
@@ -115,6 +147,30 @@ public class CrosshairIngredientInteraction : MonoBehaviour
                 }
                 return;
             }
+
+            // 6. Finished Hamburger
+            if (hit.collider.CompareTag("FinishedHamburger") && !inventory.IsCarrying())
+            {
+                interactionText.text = "[E] Pick up Hamburger";
+                interactionText.gameObject.SetActive(true);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    inventory.PickUpIngredient(IngredientType.None, handHeldHamburgerPrefab);
+
+                    FinishedHamburgerInstance instance = hit.collider.GetComponent<FinishedHamburgerInstance>();
+                    if (instance != null && instance.originatingBuilder != null)
+                    {
+                        instance.originatingBuilder.ClearFinishedHamburger();
+                    }
+
+                    Destroy(hit.collider.gameObject);
+                    Debug.Log("Picked up finished hamburger");
+                }
+                return;
+            }
+
+
         }
 
         if (interactionText != null)
