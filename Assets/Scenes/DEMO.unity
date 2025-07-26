@@ -920,7 +920,7 @@ MonoBehaviour:
   speed: 5
   mouseSensitivity: 2
   gravity: -9.81
-  cameraTransform: {fileID: 0}
+  cameraTransform: {fileID: 1909850111}
 --- !u!143 &9210400117023751021
 CharacterController:
   m_ObjectHideFlags: 0
