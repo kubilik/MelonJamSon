@@ -148,5 +148,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderUIPrefab: {fileID: 6425981973140534287, guid: 6089c2a961d84ac40975543cda354452, type: 3}
   stopDistance: 1
-  waitBeforeOrderDuration: 5
-  deliveryDuration: 10
+  waitBeforeOrderDuration: 50
+  deliveryDuration: 50
