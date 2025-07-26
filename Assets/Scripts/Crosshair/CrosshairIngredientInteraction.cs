@@ -159,7 +159,7 @@ public class CrosshairIngredientInteraction : MonoBehaviour
                     inventory.PickUpIngredient(IngredientType.None, handHeldHamburgerPrefab);
 
                     // HamburgerBuilder'ý bulup temizle
-                    HamburgerBuilder[] allBuilders = FindObjectsOfType<HamburgerBuilder>();
+                    HamburgerBuilder[] allBuilders = Object.FindObjectsByType<HamburgerBuilder>(FindObjectsSortMode.None);
                     foreach (var builder in allBuilders)
                     {
                         if (builder.HasFinishedBurger)
@@ -168,6 +168,7 @@ public class CrosshairIngredientInteraction : MonoBehaviour
                             break;
                         }
                     }
+
 
                     Destroy(hit.collider.gameObject);
                     Debug.Log("Picked up finished hamburger");
