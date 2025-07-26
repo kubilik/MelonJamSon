@@ -4048,6 +4048,7 @@ MonoBehaviour:
     m_Bits: 192
   handHeldTacoPrefab: {fileID: 6647510387901201030, guid: 1c4a5791efe14cb419ecbe5152889807, type: 3}
   handHeldHamburgerPrefab: {fileID: 3092291944669211953, guid: 8469d5e535118644ca5e4b399cd9dd97, type: 3}
+  handHeldShake1Prefab: {fileID: 1462478551769125655, guid: 1fbb4ab5daa0273448f41f2f72e735f2, type: 3}
 --- !u!1001 &3268910345311431233
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4197321140229828340}
   m_Layer: 0
   m_Name: finished shake1
-  m_TagString: Untagged
+  m_TagString: FinishedShake1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

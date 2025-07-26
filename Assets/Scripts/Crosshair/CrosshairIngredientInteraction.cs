@@ -9,6 +9,7 @@ public class CrosshairIngredientInteraction : MonoBehaviour
 
     public GameObject handHeldTacoPrefab;
     public GameObject handHeldHamburgerPrefab;
+    public GameObject handHeldShake1Prefab;
 
     private Camera cam;
 
@@ -208,21 +209,20 @@ public class CrosshairIngredientInteraction : MonoBehaviour
                             shakePoint.PlaceCup(cupVisual);
                             Debug.Log("Placed cup under shake machine.");
                         }
-
                     }
                 }
                 else
                 {
-                    interactionText.text = "Cup already placed";
-                    interactionText.gameObject.SetActive(true);
+                    // Bardak varsa, ekstra etkileþim yazýsý gösterilmez
+                    interactionText.gameObject.SetActive(false);
                 }
-
                 return;
             }
 
+
             // 5. Shake Fill Button
             ShakeMachineFiller filler = hit.collider.GetComponent<ShakeMachineFiller>();
-            if (filler != null)
+            if (filler != null && filler.cupPlacementPoint != null && filler.cupPlacementPoint.HasCup())
             {
                 interactionText.text = "[E] Fill cup";
                 interactionText.gameObject.SetActive(true);
@@ -235,7 +235,26 @@ public class CrosshairIngredientInteraction : MonoBehaviour
             }
 
 
+            // 6. Any Shake (not using tag!)
+            IngredientItem shakeItem = hit.collider.GetComponent<IngredientItem>();
+            if (shakeItem != null &&
+                (shakeItem.ingredientType == IngredientType.Shake1FilledCup ||
+                 shakeItem.ingredientType == IngredientType.Shake1WithIce ||
+                 shakeItem.ingredientType == IngredientType.FinalShake1) &&
+                !inventory.IsCarrying())
+            {
+                interactionText.text = "[E] Pick up Shake";
+                interactionText.gameObject.SetActive(true);
 
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    inventory.PickUpIngredient(shakeItem.ingredientType, handHeldShake1Prefab);
+                    Destroy(hit.collider.gameObject);
+                    Debug.Log("Picked up shake: " + shakeItem.ingredientType);
+                }
+
+                return;
+            } 
 
         }
 

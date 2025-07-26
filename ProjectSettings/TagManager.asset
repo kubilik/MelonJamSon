@@ -8,6 +8,7 @@ TagManager:
   - FinishedTaco
   - Ingredient
   - FinishedHamburger
+  - FinishedShake1
   layers:
   - Default
   - TransparentFX
