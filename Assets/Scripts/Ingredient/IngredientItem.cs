@@ -10,7 +10,12 @@ public enum IngredientType
     Bun,         
     Patty,       
     Cheese,      
-    Lettuce
+    Lettuce, 
+    ShakeEmptyCup,
+    Shake1FilledCup,
+    Shake1WithIce,
+    Shake1WithStraw,
+    FinalShake1
 }
 
 public class IngredientItem : MonoBehaviour

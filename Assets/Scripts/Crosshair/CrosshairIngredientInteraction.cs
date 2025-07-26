@@ -176,6 +176,21 @@ public class CrosshairIngredientInteraction : MonoBehaviour
                 return;
             }
 
+            // ShakeCupDispenser
+            ShakeCupDispenser shakeDispenser = hit.collider.GetComponent<ShakeCupDispenser>();
+            if (shakeDispenser != null && !inventory.IsCarrying())
+            {
+                interactionText.text = "[E] Take cup";
+                interactionText.gameObject.SetActive(true);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    shakeDispenser.TryGiveCup(inventory);
+                }
+
+                return;
+            }
+
 
 
         }
